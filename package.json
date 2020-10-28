@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/jorsebsant/chatbot-ai/issues"
   },
-  "homepage": "https://github.com/jorsebsant/chatbot-ai#readme"
+  "homepage": "https://github.com/jorsebsant/chatbot-ai#readme",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
 }
