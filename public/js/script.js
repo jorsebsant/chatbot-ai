@@ -1,3 +1,4 @@
+const socket = io();
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
@@ -11,9 +12,16 @@ document.querySelector('button').addEventListener('click', () => {
 recognition.addEventListener('result', (e) => {
   let last = e.results.length - 1;
   let text = e.results[last][0].transcript;
-
-  console.log('Confidence: ' + e.results[0][0].confidence);
-  console.log('text: ' + text);
-
-  // We will use the Socket.IO here later…
+  socket.emit('chat message', text);
 });
+
+socket.addEventListener('bot:response', (response)=>{
+ synthVoice(response)
+})
+
+function synthVoice(text) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance();
+  utterance.text = text;
+  synth.speak(utterance);
+}
